@@ -39,7 +39,7 @@ jobs:
     - name: Test tests.py
       run: |
         # Run specific tests.py file
-        python tests.py
+        python test.py
 
     - name: Clean up
       run: |
