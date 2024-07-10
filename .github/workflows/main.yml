@@ -1,0 +1,53 @@
+name: Python Flask CI
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull request to main branch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest  # Use the latest version of Ubuntu
+
+    steps:
+    - uses: actions/checkout@v2  # Checkout the repository to the runner
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9  # Install Python 3.9
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Lint with flake8
+      run: |
+        # Lint all Python files in the repository
+        flake8 *.py
+
+    - name: Format code with black
+      run: |
+        # Format all Python files in the repository
+        black *.py
+
+    - name: Run tests with pytest
+      run: |
+        # Run tests using pytest
+        pytest --verbose
+
+    - name: Test tests.py
+      run: |
+        # Run specific tests.py file
+        python tests.py
+
+    - name: Clean up
+      run: |
+        # Clean up temporary files and directories
+        find . -type f -name "*.pyc" -delete
+        find . -type d -name "__pycache__" -delete
