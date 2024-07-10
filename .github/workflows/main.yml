@@ -36,11 +36,6 @@ jobs:
         # Format all Python files in the repository
         black *.py
 
-    - name: Run tests with pytest
-      run: |
-        # Run tests using pytest
-        pytest --verbose
-
     - name: Test tests.py
       run: |
         # Run specific tests.py file
